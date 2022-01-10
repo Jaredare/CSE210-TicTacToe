@@ -9,19 +9,20 @@ def main():
     turn = 0
     
     grid_size = int(input(f"How big of a grid would you like to play tic tac toe on? "))
-    spacing = round(math.log(grid_size, 10) + 0.5)
+    spacing = round(math.log((grid_size**2), 10) + 0.5)
     game_state = create_initial_state(grid_size)
 
     while run_game == True:
         game_state, turn, run_game, winner = game_step(game_state, turn, grid_size, spacing)
 
+    screen_print(game_state, spacing, grid_size)
     print(f"Congratulations to player {winner} for winning!\n")
 
 
 
 def game_step(game_state, turn, grid_size, spacing):
     """This function will move the game along by one turn."""
-    screen_print(game_state, spacing)
+    screen_print(game_state, spacing, grid_size)
 
     game_state, turn, win_combo = do_move(game_state, turn, grid_size)
 
@@ -33,9 +34,11 @@ def game_step(game_state, turn, grid_size, spacing):
 
     
 
-def screen_print(game_state, spacing):
+def screen_print(game_state, spacing, grid_size):
     """Prints the screen of the game so the player can visualize it."""
+    i_count = 0
     for i in game_state:
+        i_count += 1
         for j in range(len(i)):
 
             if j + 1 != len(i):
@@ -53,7 +56,15 @@ def screen_print(game_state, spacing):
                 if isinstance(printed_digit, int):
                     printed_digit += 1
                 print(f" {printed_digit}")
-    
+
+        if grid_size == 2 and i_count != len(game_state):
+            print("---+---")
+        elif grid_size == 3 and i_count != len(game_state):
+            print("---+---+---")
+        elif grid_size == 4 and i_count != len(game_state):
+            print("---+---+---+---")
+        elif i_count != len(game_state):
+            print("----------------------------------------------------------------------------")
 
 
 def create_initial_state(grid_size):
