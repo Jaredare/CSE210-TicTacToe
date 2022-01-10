@@ -12,7 +12,7 @@ def main():
     while run_game == True:
         game_state, turn, run_game, winner = game_step(game_state, turn, grid_size, spacing)
 
-    print(f"Congratulations to player {winner} for winning!")
+    print(f"Congratulations to player {winner} for winning!\n")
 
 
 
@@ -101,58 +101,109 @@ def check_for_winner(combo):
     user_choice, game_state, player, grid_size = combo
 
     row_choice = game_state[user_choice // grid_size]
+
+    win = False
     
-    # Horizontal
+        
+        # Horizontal
+        
+    try:  
+        # Choice plus two to the right.
+        if   (game_state[user_choice // grid_size])[user_choice % grid_size] == player and (game_state[user_choice // grid_size])[(user_choice % grid_size) + 1] == player and (game_state[user_choice // grid_size])[(user_choice % grid_size) + 2] == player:
+            win = True
+    except:
+        pass
 
-    # Choice plus two to the right.
-    if row_choice[user_choice % grid_size] == player and row_choice[(user_choice % grid_size) + 1] == player and row_choice[(user_choice % grid_size) + 2] == player:
-        win = True
-    # Choice plus two to the left.
-    elif row_choice[user_choice % grid_size] == player and row_choice[(user_choice % grid_size) - 1] == player and row_choice[(user_choice % grid_size) - 2] == player:
-        win = True
-    # Choice plus one on either side.
-    elif row_choice[user_choice % grid_size] == player and row_choice[(user_choice % grid_size) - 1] == player and row_choice[(user_choice % grid_size) + 1] == player:
-        win = True
+        
+    try:
+        # Choice plus two to the left.       
+        if (game_state[user_choice // grid_size])[user_choice % grid_size] == player and (game_state[user_choice // grid_size])[(user_choice % grid_size) - 1] == player and (game_state[user_choice // grid_size])[(user_choice % grid_size) - 2] == player:
+            win = True
+    except:
+        pass
+
+        
+    try:
+        # Choice plus one on either side.
+        if (game_state[user_choice // grid_size])[user_choice % grid_size] == player and (game_state[user_choice // grid_size])[(user_choice % grid_size) - 1] == player and (game_state[user_choice // grid_size])[(user_choice % grid_size) + 1] == player:
+            win = True
+    except:
+        pass
 
 
-    # Vertical
 
-    # Choice plus two down.
-    if (row_choice)[user_choice % grid_size] == player and (row_choice + 1)[user_choice % grid_size] == player and (row_choice + 2)[user_choice % grid_size] == player:
-        win = True
-    # Choice plus two up.
-    elif (row_choice)[user_choice % grid_size] == player and (row_choice - 1)[user_choice % grid_size] == player and (row_choice - 2)[user_choice % grid_size] == player:
-        win = True
-    # Choice plus one up and one down.
-    elif (row_choice)[user_choice % grid_size] == player and (row_choice + 1)[user_choice % grid_size] == player and (row_choice - 1)[user_choice % grid_size] == player:
-        win = True
+        # Vertical
+
+    try:
+        # Choice plus two down.
+        if   (row_choice)[user_choice % grid_size] == player and (game_state[(user_choice // grid_size) + 1])[user_choice % grid_size] == player and (game_state[(user_choice // grid_size) + 2])[user_choice % grid_size] == player:
+            win = True
+    except:
+        pass
+
+    try:
+        # Choice plus two up.
+        if (row_choice)[user_choice % grid_size] == player and (game_state[(user_choice // grid_size - 1)])[user_choice % grid_size] == player and (game_state[(user_choice // grid_size) - 2])[user_choice % grid_size] == player:
+            win = True
+    except:
+        pass
+
+    try:
+        # Choice plus one up and one down.
+        if (row_choice)[user_choice % grid_size] == player and (game_state[(user_choice // grid_size) + 1])[user_choice % grid_size] == player and (game_state[(user_choice // grid_size) - 1])[user_choice % grid_size] == player:
+            win = True
+    except:
+        pass
 
 
-    # Diagonal /
+        # Diagonal /
 
-    # Choice plus two up-right
-    if (row_choice)[user_choice % grid_size] == player and (row_choice - 1)[(user_choice % grid_size) + 1] == player and (row_choice - 2)[user_choice % grid_size + 2] == player:
-        win = True
-    # Choice plus two down-left
-    elif (row_choice)[user_choice % grid_size] == player and (row_choice + 1)[user_choice % grid_size - 1] == player and (row_choice + 2)[user_choice % grid_size - 2] == player:
-        win = True
-    # Choice plus one up-right and one down-left.
-    elif (row_choice)[user_choice % grid_size] == player and (row_choice + 1)[user_choice % grid_size - 1] == player and (row_choice - 1)[user_choice % grid_size + 1] == player:
-        win = True
+    try:
+        # Choice plus two up-right
+        if   (row_choice)[user_choice % grid_size] == player and (game_state[(user_choice // grid_size) - 1])[(user_choice % grid_size) + 1] == player and (game_state[(user_choice // grid_size) - 2])[user_choice % grid_size + 2] == player:
+            win = True
+    except:
+        pass
+
+    try:
+        # Choice plus two down-left
+        if (row_choice)[user_choice % grid_size] == player and (game_state[(user_choice // grid_size) + 1])[user_choice % grid_size - 1] == player and (game_state[(user_choice // grid_size) + 2])[user_choice % grid_size - 2] == player:
+            win = True
+    except:
+        pass
+
+    try:
+        # Choice plus one up-right and one down-left.
+        if (row_choice)[user_choice % grid_size] == player and (game_state[(user_choice // grid_size) + 1])[user_choice % grid_size - 1] == player and (game_state[(user_choice // grid_size) - 1])[user_choice % grid_size + 1] == player:
+            win = True
+    except:
+        pass
+        
+
+        # Diagonal \
+
+    try:
+        # Choice plus two down-right
+        if   (row_choice)[user_choice % grid_size] == player and (game_state[(user_choice // grid_size) + 1])[(user_choice % grid_size) + 1] == player and (game_state[(user_choice // grid_size) + 2])[user_choice % grid_size + 2] == player:
+            win = True
+    except:
+        pass
+
+    try:
+        # Choice plus two up-left
+        if (row_choice)[user_choice % grid_size] == player and (game_state[(user_choice // grid_size) - 1])[user_choice % grid_size - 1] == player and (game_state[(user_choice // grid_size) - 2])[user_choice % grid_size - 2] == player:
+            win = True
+    except:
+        pass
+
+    try:
+        # Choice plus one down-right and one up-left.
+        if (row_choice)[user_choice % grid_size] == player and (game_state[(user_choice // grid_size) - 1])[user_choice % grid_size - 1] == player and (game_state[(user_choice // grid_size) + 1])[user_choice % grid_size + 1] == player:
+            win = True
+    except:
+        pass
+
     
-
-    # Diagonal \
-
-    # Choice plus two down-right
-    if (row_choice)[user_choice % grid_size] == player and (row_choice + 1)[(user_choice % grid_size) + 1] == player and (row_choice + 2)[user_choice % grid_size + 2] == player:
-        win = True
-    # Choice plus two up-left
-    elif (row_choice)[user_choice % grid_size] == player and (row_choice - 1)[user_choice % grid_size - 1] == player and (row_choice - 2)[user_choice % grid_size - 2] == player:
-        win = True
-    # Choice plus one down-right and one up-left.
-    elif (row_choice)[user_choice % grid_size] == player and (row_choice - 1)[user_choice % grid_size - 1] == player and (row_choice + 1)[user_choice % grid_size + 1] == player:
-        win = True
-
 
     # Is the game won?    
     if win:
