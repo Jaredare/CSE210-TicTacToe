@@ -1,3 +1,6 @@
+# CSE 210 W02 Prove: Solo Code Submission - Tic Tac Toe
+# Author(s): Jared Brooks. 
+
 import math
 
 def main():
@@ -36,8 +39,10 @@ def screen_print(game_state, spacing):
         for j in range(len(i)):
 
             if j + 1 != len(i):
-                # Incorporate this. {:>5d}
+
+                # Incorporate this? {:>5d}
                 # {:>`spacing`d}
+
                 printed_digit = i[j]
                 if isinstance(printed_digit, int):
                     printed_digit += 1
